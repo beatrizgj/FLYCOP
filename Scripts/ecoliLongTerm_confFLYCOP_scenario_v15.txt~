@@ -1,0 +1,5 @@
+use-instances = false
+runObj = QUALITY
+numberOfRunsLimit = 500
+pcs-file = ecoliLongTerm_wrapper_params_vLimitedOxygen.pcs
+algo = "python3 -W ignore ../Scripts/ecoliLongTerm_wrapper_v15.py"

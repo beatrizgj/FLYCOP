@@ -1,0 +1,99 @@
+#!/usr/bin/python3
+
+
+src='EcoliLongTermTemplateOptimizeConsortiumV12/'
+dst='EcoliLongTermTemplateOptimizeConsortiumTempV190'
+dirPlots='../smac-output/PlotsScenario190/'
+
+import cobra
+import pandas as pd
+import tabulate
+import re
+import sys
+import getopt
+import os.path
+import copy
+import csv
+import math
+import cobra.flux_analysis.variability
+import massedit
+import subprocess
+import shutil, errno
+import statistics
+import importlib
+
+# Load code of individual run
+sys.path.append('../Scripts')
+import ecoliLongTerm
+
+    
+# Parsing parameters:
+# Reading the first 5 arguments in SMAC
+instance = sys.argv[1]
+specifics = sys.argv[2]
+cutoff = int(float(sys.argv[3]) + 1)
+runlength = int(sys.argv[4])
+seed = int(sys.argv[5])
+
+# It doesn't work!!
+#try:
+##	opts, args = getopt.getopt(sys.argv[1:],"s:c:S:E:P:")
+##    	opts, args = getopt.getopt(sys.argv[1:],"s:c:b:")
+#    	opts, args = getopt.getopt(sys.argv[6:],['p1_sucrPer=','p2_cbl=','p3_cyanoIniBiomass='])    
+#except getopt.GetoptError:
+#	print 'modulateSucrCblAndIniBiomassProp.py -s <%sucrose> -c <cbl in {0.00011,0.00022,0.00045,0.0022}> -b <CyanoIniBiomass>'
+#	# example: python getFluxesDifferentATPMvsBiomass.py -s 70 -c 0.0022 -b 0.5
+#	sys.exit(2)
+#for opt, arg in opts:
+#	if opt == "--p1_percSucr":
+#		sucrPer = float(arg)
+#	elif opt == "--p2_cbl": 
+#		cbl = float(arg)
+#	elif opt == "--p3_cyanoIniBiomass": 
+#		cyanoIniBiomass = float(arg)                
+## 	 elif opt == "-S": 
+##		cyanoIniBiomass = float(arg)
+##        elif opt == "-E": 
+##		eColiIniBiomass = float(arg)
+##        elif opt == "-P": 
+##		pPutIniBiomass = float(arg)                
+### End form parsing
+glu1 = float(sys.argv[7])
+ac1 = float(sys.argv[9])
+o21 = float(sys.argv[11])
+glu2 = float(sys.argv[13])
+ac2 = float(sys.argv[15])
+o22 = float(sys.argv[17])
+
+
+
+# Copy the template directory
+if (os.path.exists(dst)):
+    shutil.rmtree(dst)
+try:
+    shutil.copytree(src, dst)
+except OSError as exc: # python >2.5
+    if exc.errno == errno.ENOTDIR:
+        shutil.copy(src, dst)
+    else: raise
+    
+os.chdir(dst)
+
+if not os.path.exists(dirPlots):
+    os.makedirs(dirPlots)
+    
+
+# At a higher level: Running the wrapper-script in SMAC: in modulateSucrCblAndIniBiomassProp_optimizeConsortiumSMACwrapper.py
+# With biomasses: avgfitness,sdfitness=ecoliLongTerm_oneConf(glu1,ac1,glu2,ac2)
+avgfitness,sdfitness=ecoliLongTerm.ecoliLongTerm_oneConf(glu1,ac1,o21,glu2,ac2,o22,'MaxYieldNew_MinTime',dirPlots,3)
+
+
+# Print wrapper Output:
+print('Result of algorithm run: SAT, 0, 0, '+str(1-avgfitness)+', 0, '+str(seed)+', '+str(sdfitness)) # fitness maximize
+#print('Result of algorithm run: SAT, 0, 0, '+str(avgfitness)+', 0, '+str(seed)+', '+str(sdfitness)) # fitness minimize
+
+# Remove the temporal dir for this run result
+os.chdir('..')
+shutil.rmtree(dst)
+
+

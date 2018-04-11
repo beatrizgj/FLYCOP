@@ -1,0 +1,10 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+   echo usage: $0 \"comets script name\"
+   exit
+fi
+SCRIPT=$1
+VERSION=comets_2.0.3
+
+
+java -Xmx8G -classpath  /usr/share/java/glpk-java.jar:${GUROBI_HOME}/lib/gurobi.jar:$COMETS_HOME/lib/jogl/jogamp-all-platforms/jar/jogl-all.jar:$COMETS_HOME/lib/jogl/jogamp-all-platforms/jar/gluegen-rt.jar:$COMETS_HOME/lib/jogl/jogamp-all-platforms/jar/gluegen.jar:$COMETS_HOME/lib/jogl/jogamp-all-platforms/jar/gluegen-rt-natives-macosx-universal.jar:$COMETS_HOME/lib/jogl/jogamp-all-platforms/jar/jogl-all-natives-macosx-universal.jar:$COMETS_HOME/bin/$VERSION.jar -Djava.library.path=$LD_LIBRARY_PATH  edu.bu.segrelab.comets.Comets -loader edu.bu.segrelab.comets.fba.FBACometsLoader -script $SCRIPT

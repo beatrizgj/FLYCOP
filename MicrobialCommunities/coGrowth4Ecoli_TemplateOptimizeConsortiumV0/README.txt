@@ -1,0 +1,2 @@
+- Layout with initial amount of aa (0.01 each) to allow the strains begin to growth.
+- 20 glc, with glucose as limiting nutrient

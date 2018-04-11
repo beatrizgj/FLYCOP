@@ -1,0 +1,6 @@
+seed = 123
+use-instances = false
+runObj = QUALITY
+numberOfRunsLimit = 500
+pcs-file = ecoliLongTerm_confFLYCOP_params_v0.pcs
+algo = "python3 -W ignore ../Scripts/ecoliLongTerm_wrapperFLYCOP_v3.py"
