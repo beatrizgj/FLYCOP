@@ -1,8 +1,9 @@
+# FLYCOP
+
 ---
 title: "FLYCOP"
 author: "Beatriz García-Jiménez"
 date: "April, 2018"
-output: html_document
 ---
 
 FLYCOP (FLexible sYnthetic Consortium OPtimization) is a framework that improves the understanding of the metabolic behaviour of microbial consortia and to automatize the modeling of those communities, by designing and optimizing enginered microbial consortia given a particular goal.
