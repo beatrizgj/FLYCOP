@@ -13,7 +13,7 @@ FLYCOP contributes with multiple and assorted applications, such as simulating d
 
 This repository contains the code and configuration files reproducing the study cases described in:
 
-**_FLYCOP: metabolic modeling-based analysis and engineering microbial communities._ Beatriz García-Jiménez, José Luis García and Juan Nogales (2018). _Bioinformatics (In Press)_ **
+**FLYCOP: metabolic modeling-based analysis and engineering microbial communities. Beatriz García-Jiménez, José Luis García and Juan Nogales (2018). Bioinformatics (In Press)**
 
 So far, FLYCOP has been applied to design and optimize 3 different microbial consortia:
 
