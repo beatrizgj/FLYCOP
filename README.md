@@ -1,8 +1,9 @@
 ---
 title: "FLYCOP"
 author: "Beatriz García-Jiménez"
-date: "April, 2018"
 ---
+
+![](FLYCOP_logo.jpg){width=35%}
 
 # FLYCOP
 
@@ -13,7 +14,7 @@ FLYCOP contributes with multiple and assorted applications, such as simulating d
 This repository contains the code and configuration files reproducing the study cases described in:
 
 _**FLYCOP: metabolic modeling-based analysis and engineering microbial communities.**_
-Beatriz García-Jiménez, José Luis García and Juan Nogales (2018) *(Submitted)* 
+**Beatriz García-Jiménez, José Luis García and Juan Nogales (2018). _Bioinformatics (In Press)_ **
 
 So far, FLYCOP has been applied to design and optimize 3 different microbial consortia:
 
