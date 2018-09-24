@@ -11,9 +11,9 @@ FLYCOP (FLexible sYnthetic Consortium OPtimization) is a framework that improves
 
 FLYCOP contributes with multiple and assorted applications, such as simulating different scenarios before in-vivo experiments; defining medium composition and detecting limiting nutrients; discovering the biological metric optimized in an evolutionary process; optimizing cross-feeding relationships; optimizing strain ratios in the consortium; etc.
 
-This repository contains the code and configuration files reproducing the study cases described in:
+**Citation**: This repository contains the code and configuration files reproducing the study cases described in (please, cite us if you use FLYCOP in your work):
 
-**FLYCOP: metabolic modeling-based analysis and engineering microbial communities. Beatriz García-Jiménez, José Luis García and Juan Nogales (2018). Bioinformatics (In Press). Pre-print: [doi: 10.13140/RG.2.2.31475.22561](http://dx.doi.org/10.13140/RG.2.2.31475.22561)**
+**Beatriz García-Jiménez, José Luis García, Juan Nogales; FLYCOP: metabolic modeling-based analysis and engineering microbial communities, Bioinformatics, Volume 34, Issue 17, 1 September 2018, Pages i954–i963, [doi: 10.1093/bioinformatics/bty561](https://doi.org/10.1093/bioinformatics/bty561)**
 
 So far, FLYCOP has been applied to design and optimize 3 different microbial consortia:
 
@@ -23,15 +23,51 @@ So far, FLYCOP has been applied to design and optimize 3 different microbial con
 
 
 ***
-### Pre-requisites
-FLYCOP pipeline uses some software, which must be installed before:
+### Installation
+FLYCOP software run in LINUX OS. FLYCOP can be run in (a) a docker container (recommended) or (b) installing the pre-requisites individual software by yourself. 
+
+#### (a) Docker container (recommended):
+```{r, out.width = "50px", echo=FALSE}
+knitr::include_graphics("docker_logo.png")
+```
+
+Once you have the [docker](https://docs.docker.com/) daemon running, download the docker-flycop container from the cloud:
+```{sh eval=FALSE}  
+docker pull beatrizgj/docker-flycop
+```
+
+And run the FLYCOP container:
+```{sh eval=FALSE}
+docker run -it beatrizgj/docker-flycop
+```
+
+Or you could use additional parameters (*-it*,*-env*,*-volume*) to have an interactive bash shell, exporting the display, and sharing a folder between the local host (/home/user/DockerOutput/) and the container (/home/host/) to allow moving files easily.
+```{sh eval=FALSE}
+xhost +local:root
+docker run -it --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --volume="/home/user/DockerOutput/:/home/host/:rw" beatrizgj/docker-flycop
+xhost -local:root
+```
+
+Define the location of your personal [gurobi](http://www.gurobi.com/academia/for-universities) solver license (required by COMETS) in the container (for example, \<path_to_gurobi_license\>=/home/user):
+```{sh eval=FALSE}
+GRB_LICENSE_FILE=<path_to_gurobi_license>/gurobi.lic
+```
+
+Move to the FLYCOP software directory:
+```{sh eval=FALSE}
+cd FLYCOP
+```
+
+
+#### (b) Your-self installation: basic pre-requisites
+
+FLYCOP pipeline uses some software (and all their dependencies), which must be installed before:
 
 * [COBRApy](https://opencobra.github.io/cobrapy/): python package (checked with v0.5.11)  
 * [COMETS](http://www.bu.edu/segrelab/comets/) (v2.0.3) (faster with gurobi solver)  
 * [SMAC](http://www.cs.ubc.ca/labs/beta/Projects/SMAC/) (in Java, v2.10.03)   
 Additionally, [R software](https://www.r-project.org/) is required.
 
-FLYCOP is an under development software, to run LINUX OS.
 
 
 ***

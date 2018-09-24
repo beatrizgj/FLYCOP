@@ -37,7 +37,7 @@ invisible(dev.off())
 write.table(corrMatrix,paste('corrMatrix_',suffix,".txt",sep=""),quote=FALSE,sep="\t")
 
 # Scatterplot, with lower diagonal with correlations:
-panel.cor <- function(x, y, digits = 3, prefix = "", cex.cor=2, ...) # from help(pairs) # Only correlation, with modifications from below code
+panel.cor <- function(x, y, digits = 3, prefix = "", cex.cor=1, ...) # from help(pairs) # Only correlation, with modifications from below code
 {
   usr <- par("usr"); on.exit(par(usr))
   par(usr = c(0, 1, 0, 1))
@@ -45,10 +45,10 @@ panel.cor <- function(x, y, digits = 3, prefix = "", cex.cor=2, ...) # from help
   r <- cor(x,y)
   txt <- format(c(r, 0.123456789), digits = digits)[1]
   txt <- paste("r= ", txt, sep = "")
-  text(0.5, 0.6, txt, cex=2)
+  text(0.5, 0.6, txt, cex=1)
 }
 pdf(paste('scatterplotMatrix_',suffix,"_withCorr.pdf",sep=""),title=header)
-scatterplotMatrix(formula, data=data, smoother="",lower.panel=panel.cor,main=header)
+scatterplotMatrix(formula, data=data, smooth=list(smoother=""),lower.panel=panel.cor,main=header)
 invisible(dev.off())
 
 # Removing not stable configurations
@@ -67,7 +67,7 @@ dataSorted <- data [with(data, order(-fitness)), ]
 write.table(dataSorted,paste('dataTable_',suffix,".txt",sep=""),quote=FALSE,sep="\t",row.names=TRUE, col.names=TRUE)
 data_sdLt0.1=data[data$sd<0.1,]
 pdf(paste('scatterplotMatrix_',suffix,'sdLt0.1.pdf',sep=""),title=paste(header,'sd<0.1',sep=', '))
-scatterplotMatrix(formula,data=data_sdLt0.1, smoother="",main=paste(header,'sd<0.1',sep=', '))
+scatterplotMatrix(formula,data=data_sdLt0.1, smooth=list(smoother=""),main=paste(header,'sd<0.1',sep=', '))
 invisible(dev.off())
 
 corrMatrix<-cor(data_sdLt0.1)
