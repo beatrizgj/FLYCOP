@@ -27,9 +27,6 @@ So far, FLYCOP has been applied to design and optimize 3 different microbial con
 FLYCOP software run in LINUX OS. FLYCOP can be run in (a) a docker container (recommended) or (b) installing the pre-requisites individual software by yourself. 
 
 #### (a) Docker container (recommended):
-```{r, out.width = "50px", echo=FALSE}
-knitr::include_graphics("docker_logo.png")
-```
 
 Once you have the [docker](https://docs.docker.com/) daemon running, download the docker-flycop container from the cloud:
 ```{sh eval=FALSE}  
